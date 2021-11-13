@@ -13,6 +13,11 @@ import org.slf4j.Logger;
 
 import java.nio.file.Path;
 
+/**
+ * An open source professional Velocity plugin used for authenticate premium and non-premium players.
+ * @author yoonaxes
+ */
+
 @Plugin(
         id="velocity-auth",
         name="VelocityAuth",
