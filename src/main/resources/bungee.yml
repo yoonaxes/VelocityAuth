@@ -1,4 +1,0 @@
-name: AuthPlugin
-version: '${version}'
-main: net.yoonaxes.auth.AuthPlugin
-author: yoonaxes
