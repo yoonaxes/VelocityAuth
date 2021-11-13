@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import java.nio.file.Path;
 
 @Plugin(
-        id="VelocityAuth",
+        id="velocity-auth",
         name="VelocityAuth",
         version = "0.1",
         authors = "yoonaxes",
