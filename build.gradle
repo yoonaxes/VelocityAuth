@@ -1,0 +1,54 @@
+apply plugin: 'java'
+
+group = 'net.yoonaxes'
+version = '0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11;
+    targetCompatibility = JavaVersion.VERSION_11;
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'yoonaxes-maven'
+        url = 'https://maven.yoonaxes.pl/'
+    }
+    maven {
+        name = 'velocity-repo'
+        url = 'https://repo.velocitypowered.com/snapshots/'
+    }
+    maven {
+        name = 'jitpack-repo'
+        url = 'https://jitpack.io'
+    }
+    maven {
+        name = 'okaeri-repo'
+        url = 'https://storehouse.okaeri.eu/repository/maven-public/'
+    }
+}
+
+dependencies {
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'com.velocitypowered:velocity-api:3.0.1'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    compileOnly 'com.velocitypowered:velocity-api:3.0.1'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.mindrot:jbcrypt:0.4'
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    from {
+        configurations.runtimeClasspath.filter{ it.exists() }.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+task copyJar {
+    doLast {
+        copy {
+            from "$projectDir/build/libs/AuthPlugin-" + version + ".jar"
+            into "/home/yoonaxes/MinecraftVelocity/plugins"
+        }
+    }
+}
