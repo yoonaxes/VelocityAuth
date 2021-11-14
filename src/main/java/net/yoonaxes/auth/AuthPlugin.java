@@ -14,52 +14,53 @@ import org.slf4j.Logger;
 import java.nio.file.Path;
 
 /**
- * An open source professional Velocity plugin used for authenticate premium and non-premium players.
+ * An powerful open source professional Velocity plugin which contains authenticate
+ * and logging system and has security features that protect your proxy against attacks.
  * @author yoonaxes
  */
 
 @Plugin(
         id="velocity-auth",
-        name="VelocityAuth",
+        name="Auth",
         version = "0.1",
         authors = "yoonaxes",
-        description = "An open source professional Velocity plugin used for authenticate premium and non-premium players.",
+        description = "An powerful open source professional Velocity plugin which contains authenticate " +
+                "and logging system and has security features that protect your proxy against attacks.",
         url = "https://github.com/yoonaxes/VelocityAuth"
 )
 public class AuthPlugin {
 
     @Getter
-    @Setter (value = AccessLevel.PRIVATE)
     private static AuthPlugin instance;
 
-    @Getter (value = AccessLevel.PROTECTED)
-    private final ProxyServer proxy;
-
-    @Getter (value = AccessLevel.PROTECTED)
-    private final Logger logger;
-
-    @Getter (value = AccessLevel.PROTECTED)
-    private final Path dataDirectory;
+    @Getter
+    private static VelocityAuth auth;
 
     @Inject
     public AuthPlugin(ProxyServer proxy, Logger logger, @DataDirectory Path dataDirectory) {
-        this.proxy = proxy;
-        this.logger = logger;
-        this.dataDirectory = dataDirectory;
+
+        instance = this;
+
+        auth = new Auth(proxy, logger, dataDirectory.toFile());
+        auth.onLoad();
+
     }
 
     @Subscribe
-    public void onProxyInitialization(ProxyInitializeEvent event) {
-        logger.info("Successfully initialized {} plugin.", getClass().getSimpleName());
+    public void onProxyInitialize(ProxyInitializeEvent event) {
+        auth.onInitialize();
+        auth.getLogger().info("Successfully initialized {} plugin.", getClass().getSimpleName());
     }
 
     @Subscribe
     public void onProxyReload(ProxyReloadEvent event) {
-        logger.info("Successfully reloaded {} plugin.", getClass().getSimpleName());
+        auth.onReload();
+        auth.getLogger().info("Successfully reloaded {} plugin.", getClass().getSimpleName());
     }
 
     @Subscribe
     public void onProxyShutdown(ProxyShutdownEvent event) {
-        logger.info("Successfully disabled {} plugin.", getClass().getSimpleName());
+        auth.onShutdown();
+        auth.getLogger().info("Successfully disabled {} plugin.", getClass().getSimpleName());
     }
 }

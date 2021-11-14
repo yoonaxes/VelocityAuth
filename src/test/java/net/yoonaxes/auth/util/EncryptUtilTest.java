@@ -6,13 +6,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EncryptUtilTest {
 
+    final String password = getClass().getSimpleName() + getClass().getFields().length;
+
     @Test
     void encrypt() {
-        assertEquals(1, 1);
+        assertNotNull(EncryptUtil.encrypt(12, password));
     }
 
     @Test
     void check() {
-        assertEquals(1, 1);
+        assertTrue(EncryptUtil.check(password, EncryptUtil.encrypt(password)));
     }
 }

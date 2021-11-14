@@ -12,7 +12,7 @@ public class EncryptUtil {
 
     public String encrypt(int log_rounds, String password) {
         Validate.notNull(password, "A password to encrypt can't be null.");
-        Validate.isTrue(log_rounds > 10 && log_rounds < 30, "A value of LOG_ROUNDS must be between 10 and 30.");
+        Validate.isTrue(log_rounds >= 10 && log_rounds <= 30, "A value of LOG_ROUNDS must be between 10 and 30.");
 
         return hashpw(password, gensalt(log_rounds));
     }

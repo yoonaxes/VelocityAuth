@@ -22,19 +22,19 @@ public class RandomUtil {
     }
 
     public Integer randomInteger(int min, int max) {
-        Validate.isTrue(max > min, "A min value can't be higher than max value.");
+        Validate.isTrue(min <= max, "A min value can't be higher than max value.");
 
         return getRandom().nextInt(max - min + 1) + min;
     }
 
     public Double randomDouble(double min, double max) {
-        Validate.isTrue(max > min, "A min value can't be higher than max value.");
+        Validate.isTrue(min <= max, "A min value can't be higher than max value.");
 
         return getRandom().nextDouble() * (max - min) + min;
     }
 
     public Float randomFloat(float min, float max) {
-        Validate.isTrue(max > min, "A min value can't be higher than max value.");
+        Validate.isTrue(min <= max, "A min value can't be higher than max value.");
 
         return getRandom().nextFloat() * (max - min) + min;
     }

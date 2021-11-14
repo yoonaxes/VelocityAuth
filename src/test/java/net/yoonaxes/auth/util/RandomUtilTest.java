@@ -8,21 +8,28 @@ class RandomUtilTest {
 
     @Test
     void randomString() {
-        assertEquals(1, 1);
+        int length = 8;
+        assertTrue(RandomUtil.randomString(length, true, true).length() == length);
     }
 
     @Test
     void randomInteger() {
-        assertEquals(1, 1);
+        int random = RandomUtil.randomInteger(1, 1000);
+        assertEquals(RandomUtil.randomInteger(random, random), random);
+        assertTrue(random > 0 && random <= 1000);
     }
 
     @Test
     void randomDouble() {
-        assertEquals(1, 1);
+        double random = RandomUtil.randomDouble(1D, 1000D);
+        assertEquals(RandomUtil.randomDouble(random, random), random);
+        assertTrue(random > 0D && random <= 1000D);
     }
 
     @Test
     void randomFloat() {
-        assertEquals(1, 1);
+        float random = RandomUtil.randomFloat(1F, 1000F);
+        assertEquals(RandomUtil.randomFloat(random, random), random);
+        assertTrue(random > 0F && random <= 1000F);
     }
 }
