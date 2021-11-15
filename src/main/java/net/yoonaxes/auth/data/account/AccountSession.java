@@ -18,4 +18,8 @@ public class AccountSession {
     @Setter
     public long loggedTime;
 
+    public void setConnectedLoggedTime(long time) {
+        this.connectedTime = time;
+        this.loggedTime = time;
+    }
 }

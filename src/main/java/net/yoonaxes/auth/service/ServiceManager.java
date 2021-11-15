@@ -1,7 +1,6 @@
 package net.yoonaxes.auth.service;
 
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import net.yoonaxes.auth.service.impl.AccountService;
 
@@ -12,7 +11,6 @@ import net.yoonaxes.auth.service.impl.AccountService;
 @RequiredArgsConstructor
 public class ServiceManager {
 
-    @NonNull
     @Getter
     private AccountService accountService = new AccountService();
 
