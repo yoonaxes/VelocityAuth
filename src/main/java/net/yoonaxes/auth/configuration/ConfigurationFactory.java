@@ -44,16 +44,16 @@ public class ConfigurationFactory<T extends OkaeriConfig> {
     /**
      * Initialize your configuration.
      * @param file Configuration YAML file.
-     * @param sectionSeparator Section Separator String.
+     * @param separator Section Separator String.
      * @return Initialized Configuration Class.
      */
-    public T initialize(File file, String sectionSeparator) {
+    public T initialize(File file, String separator) {
         Validate.notNull(file, "A file value can't be null.");
-        Validate.notNull(sectionSeparator, "A section separator value can't be null.");
+        Validate.notNull(separator, "A separator value can't be null.");
 
         return (T) ConfigManager.create(getConfigurationClass(), (initializer) -> {
 
-            initializer.withConfigurer(new YamlSnakeYamlConfigurer("#", sectionSeparator));
+            initializer.withConfigurer(new YamlSnakeYamlConfigurer(separator));
 
             getSerdesPackList().forEach(initializer::withSerdesPack);
 

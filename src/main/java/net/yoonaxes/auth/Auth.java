@@ -1,9 +1,7 @@
 package net.yoonaxes.auth;
 
 import com.velocitypowered.api.proxy.ProxyServer;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import net.yoonaxes.auth.api.MojangAPI;
 import net.yoonaxes.auth.command.impl.*;
 import net.yoonaxes.auth.configuration.ConfigurationManager;
@@ -15,6 +13,7 @@ import net.yoonaxes.auth.service.ServiceManager;
 import org.slf4j.Logger;
 
 import java.io.File;
+import java.security.Security;
 
 @RequiredArgsConstructor
 public class Auth implements VelocityAuth {
@@ -41,7 +40,10 @@ public class Auth implements VelocityAuth {
     private FeatureManager featureManager;
 
     @Getter
-    private MojangAPI mojangAPI;
+    private SecurityManager securityManager;
+
+    @Getter
+    private MojangAPI mojangAPI = new MojangAPI();
 
     @Override
     public void onInitialize() {
@@ -49,15 +51,13 @@ public class Auth implements VelocityAuth {
         if(!dataFolder.exists())
             dataFolder.mkdir();
 
+        mojangAPI = new MojangAPI();
+
         registerManagers();
 
-        registerCommands(
-                configurationManager.getCommandConfiguration()
-        );
+        registerCommands();
 
         registerListeners();
-
-        mojangAPI = new MojangAPI();
 
     }
 
@@ -73,17 +73,18 @@ public class Auth implements VelocityAuth {
 
     private void registerManagers() {
 
-        configurationManager = new ConfigurationManager(
-                this.getDataFolder()
-        );
+        configurationManager = new ConfigurationManager();
 
         serviceManager = new ServiceManager();
 
         featureManager = new FeatureManager();
 
+        securityManager = new SecurityManager();
+
     }
 
-    private void registerCommands(CommandConfiguration configuration) {
+    private void registerCommands() {
+        CommandConfiguration configuration = getConfigurationManager().getCommandConfiguration();
 
         new AuthCommand()
                 .register(configuration.CMD.AUTH);

@@ -68,6 +68,12 @@ public interface VelocityAuth {
     FeatureManager getFeatureManager();
 
     /**
+     * Get a FeatureManager
+     * @return net.yoonaxes.auth.security.SecurityManager
+     */
+    SecurityManager getSecurityManager();
+
+    /**
      * Get a MojangAPI
      * @return A net.yoonaxes.auth.api.MojangAPI
      */

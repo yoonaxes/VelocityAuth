@@ -2,8 +2,7 @@ package net.yoonaxes.auth.configuration;
 
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import net.yoonaxes.auth.AuthPlugin;
 import net.yoonaxes.auth.configuration.impl.*;
 
 import java.io.File;
@@ -12,16 +11,24 @@ import java.io.File;
  * This is a manager of configurations.
  * @author yoonaxes
  */
-@RequiredArgsConstructor
 public class ConfigurationManager {
 
-    @NonNull
     @Getter (value = AccessLevel.PRIVATE)
-    private File dataFolder;
+    private final File dataFolder = AuthPlugin.getAuth().getDataFolder();
 
     @Getter
-    private CommandConfiguration commandConfiguration =
+    private final CommandConfiguration commandConfiguration =
             new ConfigurationFactory<CommandConfiguration>(CommandConfiguration.class)
-                    .initialize(new File(this.getDataFolder(), "commands.yml"));
+                    .initialize(new File(getDataFolder(), "commands.yml"));
+
+    @Getter
+    private final LanguageConfiguration languageConfiguration =
+            new ConfigurationFactory<LanguageConfiguration>(LanguageConfiguration.class)
+                    .initialize(new File(getDataFolder(), "language.yml"));
+
+    @Getter
+    private final PluginConfiguration pluginConfiguration =
+            new ConfigurationFactory<PluginConfiguration>(PluginConfiguration.class)
+                    .initialize(new File(getDataFolder(), "config.yml"));
 
 }

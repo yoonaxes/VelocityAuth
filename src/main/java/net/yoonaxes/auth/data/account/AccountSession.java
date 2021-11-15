@@ -8,18 +8,14 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class AccountSession {
 
-    @NonNull
-    @Getter
-    @Setter
-    public long connectedTime;
+//    @NonNull
+//    @Getter
+//    @Setter
+//    private long connectedTime;
+//
+//    @NonNull
+//    @Getter
+//    @Setter
+//    private long loggedTime;
 
-    @NonNull
-    @Getter
-    @Setter
-    public long loggedTime;
-
-    public void setConnectedLoggedTime(long time) {
-        this.connectedTime = time;
-        this.loggedTime = time;
-    }
 }

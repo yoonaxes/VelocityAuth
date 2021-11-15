@@ -25,7 +25,6 @@ public abstract class PlayerCommand extends Command {
 
     @Override
     protected List<String> onSuggest(CommandSource source, String alias, String[] args) {
-
         if(!(source instanceof Player))
             return EMPTY_LIST;
 

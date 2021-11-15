@@ -28,7 +28,7 @@ public abstract class Service<K, V> {
     /**
      * Default method to find a service value using key.
      * @param key A key to find value
-     * @return Finded value or null
+     * @return Found value or null
      */
     public V find(K key) {
         Validate.notNull(key, "A key value can't be null.");
@@ -37,7 +37,7 @@ public abstract class Service<K, V> {
     }
 
     /**
-     * Abstract void performed after create a instance.
+     * Abstract void performed after create an instance.
      */
     protected abstract void onRegister();
 }

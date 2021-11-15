@@ -6,14 +6,17 @@ import net.yoonaxes.auth.command.Command;
 
 import java.util.List;
 
-@Names(strategy = NameStrategy.IDENTITY, modifier = NameModifier.NONE)
+@Names(
+        strategy = NameStrategy.IDENTITY,
+        modifier = NameModifier.NONE
+)
 public class CommandConfiguration extends OkaeriConfig {
 
     @CustomKey("commands")
     @Comment("A configuration of all commands.")
-    public Commands CMD = new Commands();
+    public CommandsConfiguration CMD = new CommandsConfiguration();
 
-    public static class Commands extends OkaeriConfig {
+    public static class CommandsConfiguration extends OkaeriConfig {
 
         public Command.Configuration AUTH = new Command.Configuration(
                 "auth",
@@ -22,7 +25,7 @@ public class CommandConfiguration extends OkaeriConfig {
 
         public Command.Configuration LOGIN = new Command.Configuration(
                 "login",
-                List.of("l", "signin")
+                List.of("l", "log", "signin")
         );
 
         public Command.Configuration REGISTER = new Command.Configuration(

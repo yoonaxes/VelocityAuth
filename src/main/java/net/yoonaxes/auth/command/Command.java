@@ -33,9 +33,9 @@ public abstract class Command implements SimpleCommand {
         Validate.notNull(configuration, "A configuration value can't be null");
 
         this.register(
-                configuration.getName(),
-                configuration.getAliases()
-                        .toArray(new String[0])
+                configuration.name,
+                configuration.aliases
+                        .toArray(String[]::new)
         );
     }
 
@@ -56,11 +56,9 @@ public abstract class Command implements SimpleCommand {
     @AllArgsConstructor
     public static class Configuration extends OkaeriConfig {
 
-        @Getter
-        private String name;
+        public String name;
 
-        @Getter
-        private List<String> aliases;
+        public List<String> aliases;
 
     }
 }
