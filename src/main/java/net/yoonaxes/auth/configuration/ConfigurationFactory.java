@@ -53,7 +53,7 @@ public class ConfigurationFactory<T extends OkaeriConfig> {
 
         return (T) ConfigManager.create(getConfigurationClass(), (initializer) -> {
 
-            initializer.withConfigurer(new YamlSnakeYamlConfigurer());
+            initializer.withConfigurer(new YamlSnakeYamlConfigurer("#", sectionSeparator));
 
             getSerdesPackList().forEach(initializer::withSerdesPack);
 

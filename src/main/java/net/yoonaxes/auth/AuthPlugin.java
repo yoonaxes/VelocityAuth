@@ -42,25 +42,27 @@ public class AuthPlugin {
         instance = this;
 
         auth = new Auth(proxy, logger, dataDirectory.toFile());
-        auth.onLoad();
 
     }
 
     @Subscribe
     public void onProxyInitialize(ProxyInitializeEvent event) {
+        if(auth == null) return;
         auth.onInitialize();
-        auth.getLogger().info("Successfully initialized {} plugin.", getClass().getSimpleName());
+        auth.getLogger().info("Successfully initialized {} plugin.", VelocityAuth.class.getSimpleName());
     }
 
     @Subscribe
     public void onProxyReload(ProxyReloadEvent event) {
+        if(auth == null) return;
         auth.onReload();
-        auth.getLogger().info("Successfully reloaded {} plugin.", getClass().getSimpleName());
+        auth.getLogger().info("Successfully reloaded {} plugin.", VelocityAuth.class.getSimpleName());
     }
 
     @Subscribe
     public void onProxyShutdown(ProxyShutdownEvent event) {
+        if(auth == null) return;
         auth.onShutdown();
-        auth.getLogger().info("Successfully disabled {} plugin.", getClass().getSimpleName());
+        auth.getLogger().info("Successfully disabled {} plugin.", VelocityAuth.class.getSimpleName());
     }
 }

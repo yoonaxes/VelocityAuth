@@ -46,16 +46,11 @@ public abstract class Command implements SimpleCommand {
 
     @Override
     public List<String> suggest(Invocation invocation) {
-        List<String> stringList = onSuggest(
+        return onSuggest(
                 invocation.source(),
                 invocation.alias(),
                 invocation.arguments()
         );
-
-        if(stringList == null || stringList.isEmpty())
-            return EMPTY_LIST;
-
-        return stringList;
     }
 
     @AllArgsConstructor

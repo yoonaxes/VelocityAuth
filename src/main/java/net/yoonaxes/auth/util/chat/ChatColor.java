@@ -1,4 +1,4 @@
-package net.yoonaxes.auth.feature.chat;
+package net.yoonaxes.auth.util.chat;
 
 import java.util.Map;
 import java.util.regex.Pattern;

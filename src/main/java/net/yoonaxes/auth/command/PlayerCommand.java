@@ -14,18 +14,25 @@ public abstract class PlayerCommand extends Command {
 
     @Override
     protected void onExecute(CommandSource source, String alias, String[] args) {
+
         if(!(source instanceof Player)) {
             source.sendMessage(Component.text("This command is not available for console."));
             return;
         }
+
         onExecute((Player) source, alias, args);
     }
 
     @Override
     protected List<String> onSuggest(CommandSource source, String alias, String[] args) {
+
         if(!(source instanceof Player))
             return EMPTY_LIST;
 
-        return onSuggest((Player) source, alias, args);
+        return onSuggest(
+                (Player) source,
+                alias,
+                args
+        );
     }
 }

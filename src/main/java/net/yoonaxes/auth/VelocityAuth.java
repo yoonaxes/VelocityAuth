@@ -3,6 +3,7 @@ package net.yoonaxes.auth;
 import com.velocitypowered.api.proxy.ProxyServer;
 import net.yoonaxes.auth.api.MojangAPI;
 import net.yoonaxes.auth.configuration.ConfigurationManager;
+import net.yoonaxes.auth.feature.FeatureManager;
 import net.yoonaxes.auth.service.ServiceManager;
 import org.slf4j.Logger;
 
@@ -14,11 +15,6 @@ import java.io.File;
  * @author yoonaxes
  */
 public interface VelocityAuth {
-
-    /**
-     * Method invokes on create an instance of auth.
-     */
-    void onLoad();
 
     /**
      * Method invokes on initialize a proxy.
@@ -64,6 +60,12 @@ public interface VelocityAuth {
      * @return net.yoonaxes.auth.service.ServiceManager
      */
     ServiceManager getServiceManager();
+
+    /**
+     * Get a FeatureManager
+     * @return net.yoonaxes.auth.feature.FeatureManager
+     */
+    FeatureManager getFeatureManager();
 
     /**
      * Get a MojangAPI

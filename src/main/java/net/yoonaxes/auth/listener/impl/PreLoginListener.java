@@ -12,7 +12,7 @@ public class PreLoginListener extends ListenerHandler<PreLoginEvent> {
 
     @Override
     @Subscribe
-    public void onEvent(PreLoginEvent event) {
+    protected void onEvent(PreLoginEvent event) {
         PreLoginEvent.PreLoginComponentResult result =
                 PreLoginEvent.PreLoginComponentResult.allowed();
 

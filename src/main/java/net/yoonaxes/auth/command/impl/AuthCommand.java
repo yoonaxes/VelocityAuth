@@ -2,7 +2,7 @@ package net.yoonaxes.auth.command.impl;
 
 import com.velocitypowered.api.command.CommandSource;
 import net.yoonaxes.auth.command.Command;
-import net.yoonaxes.auth.util.ChatUtil;
+import net.yoonaxes.auth.util.chat.ChatUtil;
 
 import java.util.List;
 

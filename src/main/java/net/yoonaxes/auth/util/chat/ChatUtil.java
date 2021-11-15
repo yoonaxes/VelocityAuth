@@ -1,8 +1,9 @@
-package net.yoonaxes.auth.util;
+package net.yoonaxes.auth.util.chat;
 
 import com.velocitypowered.api.command.CommandSource;
 import lombok.experimental.UtilityClass;
 import net.kyori.adventure.text.Component;
+import net.yoonaxes.auth.util.TranslateUtil;
 
 @UtilityClass
 public class ChatUtil {

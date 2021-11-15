@@ -1,7 +1,7 @@
 package net.yoonaxes.auth.util;
 
 import lombok.experimental.UtilityClass;
-import net.yoonaxes.auth.feature.chat.ChatColor;
+import net.yoonaxes.auth.util.chat.ChatColor;
 import org.apache.commons.lang3.Validate;
 
 import java.util.Arrays;
@@ -18,7 +18,7 @@ public class TranslateUtil {
     }
 
     public List<String> translateList(List<String> stringList) {
-        Validate.notNull(stringList, "A stringList to color translate can't be null.");
+        Validate.notNull(stringList, "A string list to color translate can't be null.");
 
         return stringList.stream()
                 .map(TranslateUtil::translateString)

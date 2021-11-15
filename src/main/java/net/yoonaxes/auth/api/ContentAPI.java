@@ -25,9 +25,13 @@ public class ContentAPI {
         Validate.notNull(url, "A url can't be null.");
 
         try {
+
             this.connect(new URL(url));
+
         } catch (MalformedURLException ex) {
+
             ex.printStackTrace();
+
         }
     }
 
@@ -38,7 +42,9 @@ public class ContentAPI {
     }
 
     private void connect(URL url) {
+
         try {
+
             URLConnection connection = url.openConnection();
 
             connection.setRequestProperty("User-Agent", USER_AGENT);
@@ -52,9 +58,13 @@ public class ContentAPI {
             this.data = bufferedReader.readLine();
 
             bufferedReader.close();
+
         }
+
         catch(Exception ex) {
+
             ex.printStackTrace();
+
         }
     }
 

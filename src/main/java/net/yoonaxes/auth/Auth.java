@@ -6,9 +6,9 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import net.yoonaxes.auth.api.MojangAPI;
 import net.yoonaxes.auth.command.impl.*;
-import net.yoonaxes.auth.configuration.ConfigurationFactory;
 import net.yoonaxes.auth.configuration.ConfigurationManager;
 import net.yoonaxes.auth.configuration.impl.CommandConfiguration;
+import net.yoonaxes.auth.feature.FeatureManager;
 import net.yoonaxes.auth.listener.impl.PostLoginListener;
 import net.yoonaxes.auth.listener.impl.PreLoginListener;
 import net.yoonaxes.auth.service.ServiceManager;
@@ -38,12 +38,10 @@ public class Auth implements VelocityAuth {
     private ServiceManager serviceManager;
 
     @Getter
+    private FeatureManager featureManager;
+
+    @Getter
     private MojangAPI mojangAPI;
-
-    @Override
-    public void onLoad() {
-
-    }
 
     @Override
     public void onInitialize() {
@@ -51,20 +49,15 @@ public class Auth implements VelocityAuth {
         if(!dataFolder.exists())
             dataFolder.mkdir();
 
-        configurationManager = new ConfigurationManager(
-                new ConfigurationFactory<CommandConfiguration>(CommandConfiguration.class)
-                        .initialize(new File(dataFolder, "commands.yml"))
-        );
-
-        serviceManager = new ServiceManager();
-
-        mojangAPI = new MojangAPI();
+        registerManagers();
 
         registerCommands(
                 configurationManager.getCommandConfiguration()
         );
 
         registerListeners();
+
+        mojangAPI = new MojangAPI();
 
     }
 
@@ -75,6 +68,18 @@ public class Auth implements VelocityAuth {
 
     @Override
     public void onShutdown() {
+
+    }
+
+    private void registerManagers() {
+
+        configurationManager = new ConfigurationManager(
+                this.getDataFolder()
+        );
+
+        serviceManager = new ServiceManager();
+
+        featureManager = new FeatureManager();
 
     }
 

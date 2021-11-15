@@ -1,9 +1,12 @@
 package net.yoonaxes.auth.configuration;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import net.yoonaxes.auth.configuration.impl.CommandConfiguration;
+import net.yoonaxes.auth.configuration.impl.*;
+
+import java.io.File;
 
 /**
  * This is a manager of configurations.
@@ -13,7 +16,12 @@ import net.yoonaxes.auth.configuration.impl.CommandConfiguration;
 public class ConfigurationManager {
 
     @NonNull
+    @Getter (value = AccessLevel.PRIVATE)
+    private File dataFolder;
+
     @Getter
-    private CommandConfiguration commandConfiguration;
+    private CommandConfiguration commandConfiguration =
+            new ConfigurationFactory<CommandConfiguration>(CommandConfiguration.class)
+                    .initialize(new File(this.getDataFolder(), "commands.yml"));
 
 }
