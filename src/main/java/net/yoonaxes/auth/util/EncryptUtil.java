@@ -13,6 +13,7 @@ public class EncryptUtil {
     public String encrypt(int log_rounds, String password) {
         Validate.notNull(password, "A password to encrypt can't be null.");
         Validate.isTrue(log_rounds >= 10 && log_rounds <= 30, "A value of LOG_ROUNDS must be between 10 and 30.");
+        Validate.isTrue(password.trim().length() > 0, "A value of password must have minimum 1 character.");
 
         return hashpw(password, gensalt(log_rounds));
     }
@@ -21,6 +22,9 @@ public class EncryptUtil {
         Validate.notNull(plain, "A plain string to check can't be null.");
         Validate.notNull(hashed, "A hashed string to check can't be null.");
 
+        if(plain.trim().isEmpty())
+            return false;
+
         return checkpw(plain, hashed);
     }
 
@@ -28,3 +32,4 @@ public class EncryptUtil {
         return encrypt(DEFAULT_LOG_ROUNDS, password);
     }
 }
+

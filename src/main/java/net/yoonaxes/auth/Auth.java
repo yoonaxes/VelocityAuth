@@ -9,11 +9,12 @@ import net.yoonaxes.auth.configuration.impl.CommandConfiguration;
 import net.yoonaxes.auth.feature.FeatureManager;
 import net.yoonaxes.auth.listener.impl.PostLoginListener;
 import net.yoonaxes.auth.listener.impl.PreLoginListener;
+import net.yoonaxes.auth.listener.impl.ProxyPingListener;
+import net.yoonaxes.auth.security.SecurityManager;
 import net.yoonaxes.auth.service.ServiceManager;
 import org.slf4j.Logger;
 
 import java.io.File;
-import java.security.Security;
 
 @RequiredArgsConstructor
 public class Auth implements VelocityAuth {
@@ -109,6 +110,9 @@ public class Auth implements VelocityAuth {
                 .register();
 
         new PostLoginListener()
+                .register();
+
+        new ProxyPingListener()
                 .register();
 
     }

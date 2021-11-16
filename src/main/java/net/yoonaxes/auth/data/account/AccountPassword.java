@@ -12,6 +12,6 @@ public class AccountPassword {
     private String encrypted;
 
     @Getter
-    private int strong = encrypted.length(); // TODO: Make Password Strong System
+    private Integer strong = encrypted.length(); // TODO: Make Password Strong System
 
 }

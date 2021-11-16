@@ -1,26 +1,24 @@
 package net.yoonaxes.auth.listener;
 
-import net.yoonaxes.auth.AuthPlugin;
-import net.yoonaxes.auth.VelocityAuth;
-import net.yoonaxes.auth.configuration.impl.LanguageConfiguration;
-import net.yoonaxes.auth.configuration.impl.PluginConfiguration;
+import com.velocitypowered.api.event.Subscribe;
+import net.yoonaxes.auth.AuthResources;
 
 /**
  * A listener handler is used to create a listeners.
  * @param <E> Velocity Event
  */
-public abstract class ListenerHandler<E> {
-
-    public final static VelocityAuth AUTH = AuthPlugin.getAuth();
-
-    public final static PluginConfiguration PLUGIN_CONFIGURATION = AUTH.getConfigurationManager().getPluginConfiguration();
-    public final static LanguageConfiguration LANGUAGE_CONFIGURATION = AUTH.getConfigurationManager().getLanguageConfiguration();
+public abstract class ListenerHandler<E> implements AuthResources {
 
     public void register() {
         AUTH.getProxy().getEventManager().register(
-                AuthPlugin.getInstance(),
+                PLUGIN,
                 this
         );
+    }
+
+    @Subscribe
+    public void callEvent(E event) {
+        this.onEvent(event);
     }
 
     protected abstract void onEvent(E event);

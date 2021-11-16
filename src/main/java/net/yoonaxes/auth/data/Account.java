@@ -26,8 +26,18 @@ public class Account {
     @Getter
     private Type type;
 
+    @NonNull
+    @Getter
     private AccountAddress address;
+
+    @NonNull
+    @Getter
+    @Setter
     private AccountPassword password;
+
+    @NonNull
+    @Getter
+    @Setter
     private AccountSession session;
 
     public enum Type {

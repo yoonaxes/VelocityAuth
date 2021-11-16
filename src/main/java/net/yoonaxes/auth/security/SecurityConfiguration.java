@@ -11,4 +11,11 @@ public class SecurityConfiguration extends OkaeriConfig {
     @Comment("Default value is 30.")
     public int networkAddressCacheTTL = 30;
 
+    @CustomKey("encryption-cost")
+    @Comment("This is a value of encryption costs. (BCrypt method)")
+    @Comment("The higher value the more CPU is used for password encryption.")
+    @Comment("Minimum = 10, Maximum = 30")
+    @Comment("Default value is 12.")
+    public int encryptionCost = 12;
+
 }

@@ -1,6 +1,5 @@
 package net.yoonaxes.auth.listener.impl;
 
-import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.PreLoginEvent;
 import net.kyori.adventure.text.Component;
 import net.yoonaxes.auth.api.MojangAPI;
@@ -11,18 +10,16 @@ import net.yoonaxes.auth.util.TranslateUtil;
 
 public class PreLoginListener extends ListenerHandler<PreLoginEvent> {
 
-    private final AccountService accountService = AUTH.getServiceManager().getAccountService();
-
-    private final MojangAPI mojangAPI = AUTH.getMojangAPI();
+    private final MojangAPI MOJANG_API = AUTH.getMojangAPI();
+    private final AccountService ACCOUNT_SERVICE = SERVICE_MANAGER.getAccountService();
 
     @Override
-    @Subscribe
     protected void onEvent(PreLoginEvent event) {
         String username = event.getUsername();
         PreLoginEvent.PreLoginComponentResult result =
                 PreLoginEvent.PreLoginComponentResult.allowed();
 
-        Account account = accountService.find(username);
+        Account account = ACCOUNT_SERVICE.find(username);
 
         if(result.isAllowed())
             result = findResult(username, account);
@@ -34,7 +31,7 @@ public class PreLoginListener extends ListenerHandler<PreLoginEvent> {
         if(account == null) {
             try {
 
-                return mojangAPI.isPremiumAccount(username)
+                return MOJANG_API.isPremiumAccount(username)
                         ? PreLoginEvent.PreLoginComponentResult.forceOnlineMode()
                         : PreLoginEvent.PreLoginComponentResult.forceOfflineMode();
 

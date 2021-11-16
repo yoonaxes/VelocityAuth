@@ -10,6 +10,9 @@ import net.yoonaxes.auth.security.SecurityConfiguration;
 )
 public class PluginConfiguration extends OkaeriConfig {
 
+    @Comment("A premium players is logging automatically.")
+    public boolean autoLoginPremium = true;
+
     @Comment("A security configuration.")
     public SecurityConfiguration security = new SecurityConfiguration();
 

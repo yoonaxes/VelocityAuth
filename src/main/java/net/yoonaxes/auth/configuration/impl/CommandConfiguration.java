@@ -25,12 +25,12 @@ public class CommandConfiguration extends OkaeriConfig {
 
         public Command.Configuration LOGIN = new Command.Configuration(
                 "login",
-                List.of("l", "log", "signin")
+                List.of("l", "log")
         );
 
         public Command.Configuration REGISTER = new Command.Configuration(
                 "register",
-                List.of("reg", "signup")
+                List.of("reg")
         );
 
         public Command.Configuration CHANGEPASSWORD = new Command.Configuration(
@@ -38,8 +38,9 @@ public class CommandConfiguration extends OkaeriConfig {
                 List.of("changepass")
         );
 
+        @Exclude
         public Command.Configuration PREMIUM = new Command.Configuration(
-                "changepassword",
+                "premium",
                 List.of()
         );
     }

@@ -32,17 +32,32 @@ public class LanguageConfiguration extends OkaeriConfig {
 
     public static class MessageConfiguration extends OkaeriConfig {
 
+        @Comment("A message displays when premium player tries to perform non-premium command.")
+        public String onlyForCracked = "{$} &cYou're premium player and can't perform that command.";
+
+        @Comment("A message displays when player tries to log in when already logged.")
+        public String alreadyLogged = "{$} &cYou're already logged";
+
+        @Comment("A message displays when player tries to log in with incorrect password.")
+        public String incorrectPassword = "{$} &cThe entered password is incorrect.";
+
         @Comment("A message displays when player joins to the server.")
         public List<String> join = List.of("{$} &7You joined with &e${ACCOUNT} &7account.");
+
+        @Comment("A messages displays when player successfully log in.")
+        public List<String> successfullyLogged = List.of("{$} &aSuccessfully logged in!");
+
+        @Comment("A messages displays when player successfully registered account.")
+        public List<String> successfullyRegistred = List.of("{$} &aSuccessfully registered account!");
 
         @Comment("A messages for non-premiun players.")
         public Cracked cracked = new Cracked();
 
         public static class Cracked extends OkaeriConfig {
 
-            public List<String> login = List.of("{$} &7Login using &e/login (password)");
+            public String login = "{$} &7Login using &e/login (password)";
 
-            public List<String> register = List.of("{$} &7Register using &e/register (password) (password)");
+            public String register = "{$} &7Register using &e/register (password) (password)";
 
         }
     }
