@@ -7,10 +7,11 @@ import net.yoonaxes.auth.command.impl.*;
 import net.yoonaxes.auth.configuration.ConfigurationManager;
 import net.yoonaxes.auth.configuration.impl.CommandConfiguration;
 import net.yoonaxes.auth.feature.FeatureManager;
+import net.yoonaxes.auth.listener.impl.DisconnectListener;
 import net.yoonaxes.auth.listener.impl.PostLoginListener;
 import net.yoonaxes.auth.listener.impl.PreLoginListener;
 import net.yoonaxes.auth.listener.impl.ProxyPingListener;
-import net.yoonaxes.auth.security.SecurityManager;
+import net.yoonaxes.auth.security.AuthSecurityManager;
 import net.yoonaxes.auth.service.ServiceManager;
 import org.slf4j.Logger;
 
@@ -41,7 +42,7 @@ public class Auth implements VelocityAuth {
     private FeatureManager featureManager;
 
     @Getter
-    private SecurityManager securityManager;
+    private AuthSecurityManager securityManager;
 
     @Getter
     private MojangAPI mojangAPI = new MojangAPI();
@@ -64,7 +65,7 @@ public class Auth implements VelocityAuth {
 
     @Override
     public void onReload() {
-
+        configurationManager = new ConfigurationManager();
     }
 
     @Override
@@ -80,7 +81,7 @@ public class Auth implements VelocityAuth {
 
         featureManager = new FeatureManager();
 
-        securityManager = new SecurityManager();
+        securityManager = new AuthSecurityManager();
 
     }
 
@@ -99,9 +100,6 @@ public class Auth implements VelocityAuth {
         new ChangePasswordCommand()
                 .register(configuration.CMD.CHANGEPASSWORD);
 
-        new PremiumCommand()
-                .register(configuration.CMD.PREMIUM);
-
     }
 
     private void registerListeners() {
@@ -112,8 +110,11 @@ public class Auth implements VelocityAuth {
         new PostLoginListener()
                 .register();
 
-        new ProxyPingListener()
+        new DisconnectListener()
                 .register();
 
+        if(getConfigurationManager().getServerListConfiguration().enabled)
+            new ProxyPingListener()
+                    .register();
     }
 }

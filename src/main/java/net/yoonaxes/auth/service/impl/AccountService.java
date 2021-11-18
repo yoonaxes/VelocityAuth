@@ -10,11 +10,11 @@ import java.util.UUID;
 
 public class AccountService extends Service<UUID, Account> {
 
-    public Account create(String name, UUID uniqueId, Account.Type type, String address, String password, boolean autoLogin) {
+    private Account create(String name, UUID uniqueId, Account.Type type, String address, AccountPassword password, boolean autoLogin) {
         Account account = new Account(
                 name, uniqueId, type,
                 new AccountAddress(address, address),
-                new AccountPassword(password),
+                password,
                 new AccountSession(autoLogin ? System.currentTimeMillis() : 0L)
         );
         this.getMap().put(uniqueId, account);
@@ -22,11 +22,15 @@ public class AccountService extends Service<UUID, Account> {
     }
 
     public Account create(String name, UUID uniqueId, String address) {
-        return create(name, uniqueId, Account.Type.PREMIUM, address, "#", true);
+        return create(name, uniqueId, Account.Type.PREMIUM, address, null, true);
+    }
+
+    public Account create(String name, UUID uniqueId, String address, String password, boolean autoLogin) {
+        return create(name, uniqueId, Account.Type.CRACKED, address, new AccountPassword(password), autoLogin);
     }
 
     public Account find(String name) {
-        return this.getMap().values().stream()
+        return getMap().values().stream()
                 .filter(account -> account.getName().equalsIgnoreCase(name))
                 .findAny().orElse(null);
     }

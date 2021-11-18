@@ -4,7 +4,7 @@ import net.yoonaxes.auth.configuration.ConfigurationManager;
 import net.yoonaxes.auth.configuration.impl.LanguageConfiguration;
 import net.yoonaxes.auth.configuration.impl.PluginConfiguration;
 import net.yoonaxes.auth.feature.FeatureManager;
-import net.yoonaxes.auth.security.SecurityManager;
+import net.yoonaxes.auth.security.AuthSecurityManager;
 import net.yoonaxes.auth.service.ServiceManager;
 
 public interface AuthResources {
@@ -19,7 +19,7 @@ public interface AuthResources {
 
     FeatureManager FEATURE_MANAGER = AUTH.getFeatureManager();
 
-    SecurityManager SECURITY_MANAGER = AUTH.getSecurityManager();
+    AuthSecurityManager SECURITY_MANAGER = AUTH.getSecurityManager();
 
     PluginConfiguration PLUGIN_CONFIGURATION = AUTH.getConfigurationManager().getPluginConfiguration();
 

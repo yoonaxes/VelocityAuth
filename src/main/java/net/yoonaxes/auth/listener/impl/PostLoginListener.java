@@ -1,5 +1,6 @@
 package net.yoonaxes.auth.listener.impl;
 
+import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.PostLoginEvent;
 import com.velocitypowered.api.proxy.Player;
 import net.yoonaxes.auth.AuthPlugin;
@@ -13,6 +14,7 @@ public class PostLoginListener extends ListenerHandler<PostLoginEvent> {
     private final AccountService ACCOUNT_SERVICE = SERVICE_MANAGER.getAccountService();
 
     @Override
+    @Subscribe
     protected void onEvent(PostLoginEvent event) {
         Player player = event.getPlayer();
 
@@ -33,6 +35,9 @@ public class PostLoginListener extends ListenerHandler<PostLoginEvent> {
             }
 
         } else if(!player.isOnlineMode()) {
+
+            if(account.getSession().isLogged())
+                account.getSession().setLoggedTime(0L);
 
             MB.of(LANGUAGE_CONFIGURATION.message.cracked.login).send(player);
 

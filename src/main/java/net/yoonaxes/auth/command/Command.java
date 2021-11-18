@@ -34,6 +34,7 @@ public abstract class Command implements AuthResources, SimpleCommand {
 
     @Override
     public void execute(Invocation invocation) {
+
         try {
 
             onExecute(invocation.source(), invocation.alias(), invocation.arguments());
@@ -47,7 +48,9 @@ public abstract class Command implements AuthResources, SimpleCommand {
 
             ex.printStackTrace();
 
-            MB.of(String.format("{$} &cSomething goes wrong while executing this command. &7(%s)", ex.getClass().getSimpleName()))
+            MB.of(LANGUAGE_CONFIGURATION.message.expcetion)
+                    .withVariable("message", ex.getMessage())
+                    .withVariable("exception", ex.getClass().getSimpleName())
                     .send(invocation.source());
 
         }

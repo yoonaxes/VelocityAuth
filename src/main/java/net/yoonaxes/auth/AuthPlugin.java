@@ -37,6 +37,8 @@ public class AuthPlugin {
 
         auth = new Auth(proxy, logger, dataDirectory.toFile());
 
+        logger.info("Successfully loaded {} plugin instance.", VelocityAuth.class.getSimpleName());
+
     }
 
     @Subscribe

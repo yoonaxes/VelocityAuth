@@ -3,6 +3,7 @@ package net.yoonaxes.auth.command.impl;
 import com.velocitypowered.api.proxy.Player;
 import net.yoonaxes.auth.builder.shorts.MB;
 import net.yoonaxes.auth.command.PlayerCommand;
+import net.yoonaxes.auth.command.ValidateException;
 import net.yoonaxes.auth.data.Account;
 import net.yoonaxes.auth.security.encryption.EncryptionSecurity;
 import net.yoonaxes.auth.service.impl.AccountService;
@@ -34,10 +35,9 @@ public class LoginCommand extends PlayerCommand {
                 LANGUAGE_CONFIGURATION.message.cracked.login);
 
         when(!ENCRYPTION_SECURITY.check(args[0], account.getPassword().getEncrypted()),
-                LANGUAGE_CONFIGURATION.message.incorrectPassword);
+                LANGUAGE_CONFIGURATION.message.passwordIncorrect);
 
         MB.of(LANGUAGE_CONFIGURATION.message.successfullyLogged).send(player);
-
     }
 
     @Override

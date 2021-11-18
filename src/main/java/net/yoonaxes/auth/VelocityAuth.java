@@ -4,6 +4,7 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import net.yoonaxes.auth.api.MojangAPI;
 import net.yoonaxes.auth.configuration.ConfigurationManager;
 import net.yoonaxes.auth.feature.FeatureManager;
+import net.yoonaxes.auth.security.AuthSecurityManager;
 import net.yoonaxes.auth.service.ServiceManager;
 import org.slf4j.Logger;
 
@@ -69,9 +70,9 @@ public interface VelocityAuth {
 
     /**
      * Get a FeatureManager
-     * @return net.yoonaxes.auth.security.SecurityManager
+     * @return net.yoonaxes.auth.security.AuthSecurityManager
      */
-    net.yoonaxes.auth.security.SecurityManager getSecurityManager();
+    AuthSecurityManager getSecurityManager();
 
     /**
      * Get a MojangAPI

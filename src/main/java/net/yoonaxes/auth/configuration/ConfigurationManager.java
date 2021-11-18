@@ -31,4 +31,9 @@ public class ConfigurationManager {
             new ConfigurationFactory<PluginConfiguration>(PluginConfiguration.class)
                     .initialize(new File(getDataFolder(), "config.yml"));
 
+    @Getter
+    private final ServerListConfiguration serverListConfiguration =
+            new ConfigurationFactory<ServerListConfiguration>(ServerListConfiguration.class)
+                    .initialize(new File(getDataFolder(), "server-list.yml"));
+
 }

@@ -1,6 +1,5 @@
 package net.yoonaxes.auth.listener;
 
-import com.velocitypowered.api.event.Subscribe;
 import net.yoonaxes.auth.AuthResources;
 
 /**
@@ -14,11 +13,6 @@ public abstract class ListenerHandler<E> implements AuthResources {
                 PLUGIN,
                 this
         );
-    }
-
-    @Subscribe
-    public void callEvent(E event) {
-        this.onEvent(event);
     }
 
     protected abstract void onEvent(E event);

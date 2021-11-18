@@ -1,43 +1,32 @@
 package net.yoonaxes.auth.data;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import net.yoonaxes.auth.data.account.AccountAddress;
-import net.yoonaxes.auth.data.account.AccountPassword;
-import net.yoonaxes.auth.data.account.AccountSession;
+import lombok.*;
+import net.yoonaxes.auth.data.account.*;
 
 import java.util.UUID;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class Account {
 
-    @NonNull
     @Getter
     @Setter
     private String name;
 
-    @NonNull
     @Getter
+    @Setter
     private UUID uniqueId;
 
-    @NonNull
     @Getter
+    @Setter
     private Type type;
 
-    @NonNull
     @Getter
     private AccountAddress address;
 
-    @NonNull
     @Getter
-    @Setter
     private AccountPassword password;
 
-    @NonNull
     @Getter
-    @Setter
     private AccountSession session;
 
     public enum Type {

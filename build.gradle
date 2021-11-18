@@ -1,4 +1,6 @@
-apply plugin: 'java'
+plugins {
+    id 'java'
+}
 
 group = 'net.yoonaxes'
 version = '0.1-SNAPSHOT'
@@ -41,7 +43,6 @@ dependencies {
     implementation 'eu.okaeri:okaeri-configs-yaml-snakeyaml:3.4.2'
 
     testImplementation 'com.velocitypowered:velocity-api:3.0.1'
-    testImplementation 'org.codehaus.groovy:groovy-all:3.0.9'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 
 }

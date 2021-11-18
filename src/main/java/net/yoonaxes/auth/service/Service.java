@@ -22,7 +22,7 @@ public abstract class Service<K, V> {
      * Create a instance of Service.
      */
     public Service() {
-        this.onRegister();
+        onRegister();
     }
 
     /**

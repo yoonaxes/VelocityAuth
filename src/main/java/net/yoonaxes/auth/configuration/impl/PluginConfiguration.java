@@ -10,9 +10,20 @@ import net.yoonaxes.auth.security.SecurityConfiguration;
 )
 public class PluginConfiguration extends OkaeriConfig {
 
-    @Comment("A premium players is logging automatically.")
-    public boolean autoLoginPremium = true;
+    @Comment("Mojang Authentication")
+    @Comment("If value is false, all players will be connected to server in offline mode and premium accounts will not be logged automatically.")
+    public boolean mojangAuthentication = true;
 
+    @Comment("Repeat Password")
+    @Comment("If value is true the player need to repeat password when creating a new account or changing old password.")
+    @Comment("You must remember to need change usage of commands in language.yml!")
+    public boolean mustRepeatPassword = true;
+
+    @Comment("Suggest repeat password")
+    @Comment("If value is true a tab completion suggest a password to repeat.")
+    public boolean suggestRepeatPassword = true;
+
+    @Comment("Security Configuration")
     @Comment("A security configuration.")
     public SecurityConfiguration security = new SecurityConfiguration();
 

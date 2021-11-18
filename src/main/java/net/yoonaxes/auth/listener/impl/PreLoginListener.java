@@ -1,5 +1,6 @@
 package net.yoonaxes.auth.listener.impl;
 
+import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.PreLoginEvent;
 import net.kyori.adventure.text.Component;
 import net.yoonaxes.auth.api.MojangAPI;
@@ -14,6 +15,7 @@ public class PreLoginListener extends ListenerHandler<PreLoginEvent> {
     private final AccountService ACCOUNT_SERVICE = SERVICE_MANAGER.getAccountService();
 
     @Override
+    @Subscribe
     protected void onEvent(PreLoginEvent event) {
         String username = event.getUsername();
         PreLoginEvent.PreLoginComponentResult result =
@@ -21,7 +23,7 @@ public class PreLoginListener extends ListenerHandler<PreLoginEvent> {
 
         Account account = ACCOUNT_SERVICE.find(username);
 
-        if(result.isAllowed())
+        if(PLUGIN_CONFIGURATION.mojangAuthentication && result.isAllowed())
             result = findResult(username, account);
 
         event.setResult(result);
@@ -36,7 +38,6 @@ public class PreLoginListener extends ListenerHandler<PreLoginEvent> {
                         : PreLoginEvent.PreLoginComponentResult.forceOfflineMode();
 
             } catch(Exception ex) {
-                ex.printStackTrace();
                 return PreLoginEvent.PreLoginComponentResult.denied(
                         Component.text(
                                 TranslateUtil.translateString(LANGUAGE_CONFIGURATION.kick.mojangFailed)
