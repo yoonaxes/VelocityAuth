@@ -1,5 +1,6 @@
 package net.yoonaxes.auth.listener.impl;
 
+import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.DisconnectEvent;
 import net.yoonaxes.auth.data.Account;
 import net.yoonaxes.auth.listener.ListenerHandler;
@@ -10,6 +11,7 @@ public class DisconnectListener extends ListenerHandler<DisconnectEvent> {
     private final static AccountService ACCOUNT_SERVICE = SERVICE_MANAGER.getAccountService();
 
     @Override
+    @Subscribe
     protected void onEvent(DisconnectEvent event) {
         Account account = ACCOUNT_SERVICE.find(event.getPlayer().getUsername());
 

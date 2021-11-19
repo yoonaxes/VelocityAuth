@@ -14,7 +14,7 @@ import java.util.List;
 )
 public class ServerListConfiguration extends OkaeriConfig {
 
-    @Comment("If false all features for server list will be disabled.")
+    @Comment("If false all features for server list ping will be disabled.")
     public boolean enabled = true;
 
     public Description description = new Description();

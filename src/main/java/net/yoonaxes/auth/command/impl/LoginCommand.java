@@ -8,6 +8,7 @@ import net.yoonaxes.auth.data.Account;
 import net.yoonaxes.auth.security.encryption.EncryptionSecurity;
 import net.yoonaxes.auth.service.impl.AccountService;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class LoginCommand extends PlayerCommand {
@@ -34,7 +35,19 @@ public class LoginCommand extends PlayerCommand {
         when(args.length < 1,
                 LANGUAGE_CONFIGURATION.message.cracked.login);
 
-        when(!ENCRYPTION_SECURITY.check(args[0], account.getPassword().getEncrypted()),
+        boolean correct = false;
+        try {
+
+            if(ENCRYPTION_SECURITY.check(args[0], account.getPassword().getEncrypted()))
+                correct = true;
+
+        } catch (Exception ex) {
+
+            throw new ValidateException(LANGUAGE_CONFIGURATION.message.loginError, true);
+
+        }
+
+        when(!correct,
                 LANGUAGE_CONFIGURATION.message.passwordIncorrect);
 
         MB.of(LANGUAGE_CONFIGURATION.message.successfullyLogged).send(player);
